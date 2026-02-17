@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedCast Radio • Your world, narrated</title>
+    <meta name="description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FeedCast Radio • Your world, narrated">
+    <meta property="og:description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
+    <meta property="og:url" content="https://feedcast.radio">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FeedCast Radio • Your world, narrated">
+    <meta name="twitter:description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
+    
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <div class="radio-waves">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <span class="logo-text">FeedCast</span>
+            </div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#sample">Sample</a>
+                <button class="btn-primary" onclick="scrollToWaitlist()">Join Waitlist</button>
+            </div>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="floating-notes">
+                <div class="note note-1">♪</div>
+                <div class="note note-2">♫</div>
+                <div class="note note-3">♪</div>
+                <div class="note note-4">♫</div>
+                <div class="note note-5">♪</div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Your world, narrated.</span>
+                </h1>
+                <p class="hero-subtitle">AI radio that knows what you care about.</p>
+                <p class="hero-description">
+                    Get your personalized radio station with news, music, and stories 
+                    tailored to your interests. Generated fresh every day.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary btn-large" onclick="scrollToWaitlist()">
+                        Join the Waitlist
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button class="btn-secondary btn-large" onclick="scrollToSample()">
+                        <span class="play-icon">▶</span>
+                        Hear a Sample
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15-60</span>
+                        <span class="stat-label">minutes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">AI</span>
+                        <span class="stat-label">generated</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Daily</span>
+                        <span class="stat-label">fresh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Your personalized radio station in three simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <div class="icon-topics">
+                            <div class="topic-chip">Tech</div>
+                            <div class="topic-chip">Business</div>
+                            <div class="topic-chip">AI</div>
+                        </div>
+                    </div>
+                    <div class="step-content">
+                        <h3>1. Pick Your Topics</h3>
+                        <p>Choose from tech, business, culture, sports, and more. We'll curate news from the best sources.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">
+                        <div class="icon-vibe">
+                            <div class="vibe-selector">
+                                <div class="vibe-option active">🎵 Lo-fi</div>
+                                <div class="vibe-option">🎷 Jazz</div>
+                                <div class="vibe-option">🎹 Electronic</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-content">
+                        <h3>2. Choose Your Vibe</h3>
+                        <p>Select music style and host personality. Morning energy or evening calm — your choice.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">
+                        <div class="icon-play">
+                            <div class="play-button">
+                                <span class="play-symbol">▶</span>
+                                <div class="play-rings">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-content">
+                        <h3>3. Hit Play</h3>
+                        <p>Your station starts instantly. News, music, and stories flow together like real radio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <p class="section-subtitle">Start free, upgrade for the full experience</p>
+            
+            <div class="pricing-toggle">
+                <span class="toggle-label">Monthly</span>
+                <div class="toggle-switch" onclick="togglePricing()">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label">Yearly <span class="savings">Save 30%</span></span>
+            </div>
+
+            <div class="pricing-cards">
+                <div class="pricing-card free-card">
+                    <div class="card-header">
+                        <h3>Free</h3>
+                        <div class="price">
+                            <span class="price-amount">$0</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                    </div>
+                    <div class="card-features">
+                        <div class="feature">✓ 1 station per day</div>
+                        <div class="feature">✓ ~15 minutes</div>
+                        <div class="feature">✓ 3 topics</div>
+                        <div class="feature">✓ Basic music</div>
+                        <div class="feature">✓ 1 host voice</div>
+                        <div class="feature-limited">⚬ With brief sponsor messages</div>
+                    </div>
+                    <button class="btn-secondary btn-full">Get Started Free</button>
+                </div>
+
+                <div class="pricing-card premium-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-header">
+                        <h3>Premium</h3>
+                        <div class="price">
+                            <span class="price-amount monthly-price">$6.99</span>
+                            <span class="price-amount yearly-price">$4.99</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <div class="yearly-note">$59.99 billed annually</div>
+                    </div>
+                    <div class="card-features">
+                        <div class="feature">✓ Unlimited stations</div>
+                        <div class="feature">✓ Up to 60 minutes</div>
+                        <div class="feature">✓ Unlimited topics</div>
+                        <div class="feature">✓ Genre selection</div>
+                        <div class="feature">✓ 6+ host personalities</div>
+                        <div class="feature">✓ Ad-free experience</div>
+                        <div class="feature">✓ Custom sources</div>
+                        <div class="feature">✓ Offline downloads</div>
+                    </div>
+                    <button class="btn-primary btn-full">Start Premium Trial</button>
+                    <p class="trial-note">14-day free trial • Cancel anytime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Player Section -->
+    <section id="sample" class="sample-player">
+        <div class="container">
+            <h2 class="section-title">Hear a Sample</h2>
+            <p class="section-subtitle">Experience FeedCast Radio in action</p>
+            
+            <div class="player-container">
+                <div class="player-wrapper">
+                    <div class="player">
+                        <div class="player-artwork">
+                            <div class="artwork-visual">
+                                <div class="waveform-container">
+                                    <canvas id="waveform" width="200" height="100"></canvas>
+                                </div>
+                                <div class="pulse-rings">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="player-info">
+                            <h4 id="current-segment">Loading sample...</h4>
+                            <p id="current-description">AI-generated radio with news and music</p>
+                        </div>
+
+                        <div class="player-controls">
+                            <button class="control-btn skip-back" onclick="skipBack()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                                </svg>
+                            </button>
+                            <button class="control-btn play-pause" id="playPauseBtn" onclick="togglePlayPause()">
+                                <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                                </svg>
+                            </button>
+                            <button class="control-btn skip-forward" onclick="skipForward()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="player-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                                <div class="progress-handle" id="progressHandle"></div>
+                            </div>
+                            <div class="progress-times">
+                                <span id="currentTime">0:00</span>
+                                <span id="totalTime">2:34</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sample-features">
+                    <div class="sample-feature">
+                        <div class="feature-icon">🎯</div>
+                        <h4>Personalized Content</h4>
+                        <p>This sample is tailored for tech and AI topics</p>
+                    </div>
+                    <div class="sample-feature">
+                        <div class="feature-icon">🎵</div>
+                        <h4>AI-Generated Music</h4>
+                        <p>Seamless transitions between news and music</p>
+                    </div>
+                    <div class="sample-feature">
+                        <div class="feature-icon">🎙️</div>
+                        <h4>Natural Voice</h4>
+                        <p>Professional radio host quality</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section class="waitlist" id="waitlist">
+        <div class="container">
+            <div class="waitlist-content">
+                <h2 class="section-title">Be Among the First</h2>
+                <p class="section-subtitle">Join the waitlist and get early access to FeedCast Radio</p>
+                
+                <form class="waitlist-form" id="waitlistForm">
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder="Enter your email">
+                        <button type="submit" class="btn-primary">
+                            Join Waitlist
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                    <p class="form-note">We'll notify you when FeedCast Radio launches. No spam, promise.</p>
+                </form>
+
+                <div class="waitlist-benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon">⚡</div>
+                        <span>Early access</span>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">🎁</div>
+                        <span>Free premium trial</span>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">💡</div>
+                        <span>Shape the product</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-icon">
+                        <div class="radio-waves">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <span class="logo-text">FeedCast</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FeedCast Radio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
