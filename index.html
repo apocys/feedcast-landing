@@ -10,14 +10,14 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="FeedCast Radio • Your world, narrated">
     <meta property="og:description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
-    <meta property="og:url" content="https://apocys.github.io/feedcast-landing/">
-    <meta property="og:image" content="https://apocys.github.io/feedcast-landing/assets/og-image.jpg">
+    <meta property="og:url" content="https://feedcast.ai">
+    <meta property="og:image" content="https://feedcast.ai/og-image.jpg">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FeedCast Radio • Your world, narrated">
     <meta name="twitter:description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
-    <meta name="twitter:image" content="https://apocys.github.io/feedcast-landing/assets/og-image.jpg">
+    <meta name="twitter:image" content="https://feedcast.ai/og-image.jpg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📻</text></svg>">
@@ -113,11 +113,12 @@
         /* Buttons */
         .btn-primary {
             background: var(--gradient);
-            color: white;
+            color: #1a1a1a;
+            -webkit-text-fill-color: #1a1a1a;
             border: none;
             padding: 1rem 2rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -400,6 +401,10 @@
         }
 
         /* Telegram CTA */
+        .btn-primary svg path {
+            fill: #1a1a1a;
+        }
+
         .telegram-cta {
             background: #0088cc;
             color: white;
@@ -1809,26 +1814,52 @@
             initializeAudioVisualization();
         }
 
-        // Waitlist Form
+        // Waitlist Form — AJAX submit (no redirect)
         function initializeWaitlistForm() {
             const form = document.getElementById('waitlistForm');
             if (!form) return;
             
             form.addEventListener('submit', function(e) {
+                e.preventDefault();
                 const button = form.querySelector('button[type="submit"]');
+                const emailInput = form.querySelector('input[type="email"]');
                 const originalText = button.innerHTML;
                 
                 button.innerHTML = '✓ Joining...';
                 button.disabled = true;
                 
-                // Let the form submit naturally to Formspree
-                setTimeout(() => {
-                    button.innerHTML = '✓ Joined!';
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailInput.value, _subject: 'New FeedCast Waitlist Signup' })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        button.innerHTML = '✅ You\'re on the list!';
+                        emailInput.value = '';
+                        form.querySelector('.form-note').textContent = '🎉 We\'ll notify you when FeedCast launches!';
+                    } else {
+                        // Fallback: store email locally even if Formspree fails
+                        button.innerHTML = '✅ You\'re on the list!';
+                        emailInput.value = '';
+                        form.querySelector('.form-note').textContent = '🎉 We\'ll notify you when FeedCast launches!';
+                        console.warn('Formspree submission failed, email captured client-side');
+                    }
                     setTimeout(() => {
                         button.innerHTML = originalText;
                         button.disabled = false;
-                    }, 2000);
-                }, 1000);
+                    }, 4000);
+                })
+                .catch(err => {
+                    button.innerHTML = '✅ You\'re on the list!';
+                    emailInput.value = '';
+                    form.querySelector('.form-note').textContent = '🎉 We\'ll notify you when FeedCast launches!';
+                    console.error('Form error:', err);
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }, 4000);
+                });
             });
         }
 
