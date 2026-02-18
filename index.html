@@ -1577,31 +1577,35 @@
         let isYearlyPricing = false;
         let isPlaying = false;
         let currentTime = 0;
-        let totalTime = 154; // 2:34 in seconds
+        let totalTime = 120; // 2:00 sample
         let animationId;
         let progressInterval;
 
-        // Sample segments data
+        // Real audio element
+        const audio = new Audio('assets/sample-episode.mp3');
+        audio.preload = 'metadata';
+
+        // Sample segments data (matches actual generated episode structure)
         const sampleSegments = [
             {
                 title: "AI & Tech News Opening",
-                description: "Dan & Jess discuss latest AI developments",
-                duration: 45
+                description: "Dan & Jess kick off today's top stories",
+                duration: 35
             },
             {
-                title: "Lo-fi Interlude",
-                description: "AI-generated background music",
-                duration: 30
+                title: "Deep Dive: Top Story",
+                description: "In-depth discussion on the biggest tech news",
+                duration: 40
             },
             {
-                title: "Business & Startup Updates",
-                description: "Market analysis and funding news",
-                duration: 50
+                title: "Quick Break",
+                description: "\"We'll be right back!\" — Dan",
+                duration: 20
             },
             {
-                title: "Smooth Outro",
-                description: "Closing thoughts with fade-out music",
-                duration: 29
+                title: "And We're Back",
+                description: "Jess brings more stories to the table",
+                duration: 25
             }
         ];
 
@@ -1611,6 +1615,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeAudioVisualization();
             initializeWaitlistForm();
+            
+            // Wire real audio events
+            audio.addEventListener('loadedmetadata', () => {
+                totalTime = Math.floor(audio.duration);
+                document.getElementById('totalTime').textContent = formatTime(totalTime);
+            });
+            audio.addEventListener('timeupdate', () => {
+                currentTime = Math.floor(audio.currentTime);
+                updateProgress();
+                updatePlayerInfo();
+            });
+            audio.addEventListener('ended', () => {
+                isPlaying = false;
+                const btn = document.getElementById('playPauseBtn');
+                btn.querySelector('.play-icon').style.display = 'block';
+                btn.querySelector('.pause-icon').style.display = 'none';
+                stopWaveformAnimation();
+                currentTime = 0;
+                audio.currentTime = 0;
+                updateProgress();
+            });
+            
             updatePlayerInfo();
         });
 
@@ -1665,26 +1691,22 @@
             if (isPlaying) {
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
-                startProgressSimulation();
+                audio.play();
                 startWaveformAnimation();
             } else {
                 playIcon.style.display = 'block';
                 pauseIcon.style.display = 'none';
-                stopProgressSimulation();
+                audio.pause();
                 stopWaveformAnimation();
             }
         }
 
         function skipBack() {
-            currentTime = Math.max(0, currentTime - 15);
-            updateProgress();
-            updatePlayerInfo();
+            audio.currentTime = Math.max(0, audio.currentTime - 15);
         }
 
         function skipForward() {
-            currentTime = Math.min(totalTime, currentTime + 15);
-            updateProgress();
-            updatePlayerInfo();
+            audio.currentTime = Math.min(totalTime, audio.currentTime + 15);
         }
 
         function seekAudio(event) {
@@ -1693,31 +1715,7 @@
             const clickX = event.clientX - rect.left;
             const percentage = clickX / rect.width;
             
-            currentTime = Math.floor(totalTime * percentage);
-            updateProgress();
-            updatePlayerInfo();
-        }
-
-        function startProgressSimulation() {
-            progressInterval = setInterval(() => {
-                if (currentTime < totalTime) {
-                    currentTime++;
-                    updateProgress();
-                    updatePlayerInfo();
-                } else {
-                    // Auto reset when finished
-                    currentTime = 0;
-                    isPlaying = false;
-                    togglePlayPause();
-                }
-            }, 1000);
-        }
-
-        function stopProgressSimulation() {
-            if (progressInterval) {
-                clearInterval(progressInterval);
-                progressInterval = null;
-            }
+            audio.currentTime = totalTime * percentage;
         }
 
         function updateProgress() {
