@@ -3,1545 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FeedCast Radio • Your world, narrated</title>
-    <meta name="description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
+    <title>FeedCast — Your world, narrated.</title>
+    <meta name="description" content="AI-powered personal radio. News, music, and stories tailored to you — delivered fresh every day.">
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="FeedCast Radio • Your world, narrated">
-    <meta property="og:description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
+    <meta property="og:title" content="FeedCast — Your world, narrated.">
+    <meta property="og:description" content="AI-powered personal radio. News, music, and stories tailored to you — delivered fresh every day.">
     <meta property="og:url" content="https://feedcast.ai">
     <meta property="og:image" content="https://feedcast.ai/og-image.jpg">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FeedCast Radio • Your world, narrated">
-    <meta name="twitter:description" content="AI radio that knows what you care about. Your personalized radio station with news, music, and stories that matter to you.">
+    <meta name="twitter:title" content="FeedCast — Your world, narrated.">
+    <meta name="twitter:description" content="AI-powered personal radio. News, music, and stories tailored to you — delivered fresh every day.">
     <meta name="twitter:image" content="https://feedcast.ai/og-image.jpg">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📻</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Inter (Apple-style usage) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease-out forwards;
-        }
-
-        @keyframes fadeInPage {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Dark Mode Colors */
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2a2a2a;
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --text-muted: #666666;
-            --accent-primary: #ff6b6b;
-            --accent-secondary: #4ecdc4;
-            --gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 25%, #feca57 50%, #48dbfb 75%, #ff9ff3 100%);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow-light: 0 4px 20px rgba(255, 107, 107, 0.1);
-            --shadow-heavy: 0 8px 40px rgba(255, 107, 107, 0.2);
-        }
-
-        /* Typography */
-        .gradient-text {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            background: var(--gradient);
-            color: #1a1a1a;
-            -webkit-text-fill-color: #1a1a1a;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-heavy);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent-primary);
-            background: rgba(255, 107, 107, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .btn-large {
-            padding: 1.25rem 2.5rem;
-            font-size: 1.1rem;
-        }
-
-        .btn-full {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn-arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-primary:hover .btn-arrow,
-        .btn-secondary:hover .btn-arrow {
-            transform: translateX(4px);
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .logo-icon {
-            position: relative;
-            width: 32px;
-            height: 32px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .radio-waves {
-            display: flex;
-            gap: 2px;
-        }
-
-        .radio-waves span {
-            width: 3px;
-            height: 12px;
-            background: white;
-            border-radius: 2px;
-            animation: waveAnimation 1.5s ease-in-out infinite;
-        }
-
-        .radio-waves span:nth-child(1) { animation-delay: 0s; }
-        .radio-waves span:nth-child(2) { animation-delay: 0.3s; }
-        .radio-waves span:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes waveAnimation {
-            0%, 100% { height: 8px; opacity: 0.5; }
-            50% { height: 16px; opacity: 1; }
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .mobile-menu-toggle span {
-            width: 24px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 120px 0 80px;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .floating-notes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .note {
-            position: absolute;
-            font-size: 2rem;
-            color: var(--accent-primary);
-            opacity: 0.1;
-            animation: floatNote 20s linear infinite;
-        }
-
-        .note-1 { left: 10%; animation-delay: 0s; }
-        .note-2 { left: 20%; animation-delay: 4s; }
-        .note-3 { left: 80%; animation-delay: 8s; }
-        .note-4 { left: 70%; animation-delay: 12s; }
-        .note-5 { left: 50%; animation-delay: 16s; }
-
-        @keyframes floatNote {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.1;
-            }
-            90% {
-                opacity: 0.1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-
-        .play-icon {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-left: 8px solid currentColor;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            margin-right: 0.5rem;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-            opacity: 0.7;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Telegram CTA */
-        .btn-primary svg path {
-            fill: #1a1a1a;
-        }
-
-        .telegram-cta {
-            background: #0088cc;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin: 2rem auto;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .telegram-cta:hover {
-            background: #0077b8;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
-        }
-
-        .telegram-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        /* How It Works Section */
-        .how-it-works {
-            padding: 100px 0;
-            background: var(--bg-secondary);
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .step {
-            text-align: center;
-            padding: 2rem;
-            background: var(--bg-primary);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .step:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-light);
-        }
-
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .step p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Icon Styles */
-        .icon-topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3px;
-            justify-content: center;
-        }
-
-        .topic-chip {
-            background: white;
-            color: #333;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .icon-vibe .vibe-selector {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .vibe-option {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-size: 0.6rem;
-        }
-
-        .vibe-option.active {
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-        }
-
-        .icon-play {
-            position: relative;
-        }
-
-        .play-button {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .play-symbol {
-            color: #333;
-            font-size: 1.2rem;
-            margin-left: 2px;
-        }
-
-        .play-rings {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .play-rings span {
-            position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: ripple 2s linear infinite;
-        }
-
-        .play-rings span:nth-child(1) { animation-delay: 0s; }
-        .play-rings span:nth-child(2) { animation-delay: 0.7s; }
-        .play-rings span:nth-child(3) { animation-delay: 1.4s; }
-
-        @keyframes ripple {
-            0% {
-                width: 100%;
-                height: 100%;
-                opacity: 1;
-            }
-            100% {
-                width: 200%;
-                height: 200%;
-                opacity: 0;
-            }
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 100px 0;
-            background: var(--bg-primary);
-        }
-
-        .pricing-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .toggle-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .toggle-switch {
-            width: 60px;
-            height: 30px;
-            background: var(--bg-tertiary);
-            border-radius: 15px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .toggle-slider {
-            width: 26px;
-            height: 26px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s ease;
-        }
-
-        .toggle-switch.active .toggle-slider {
-            transform: translateX(30px);
-        }
-
-        .savings {
-            background: var(--accent-primary);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-        }
-
-        .premium-card {
-            border-color: var(--accent-primary);
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(255, 107, 107, 0.05) 100%);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .card-header h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .price {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .price-amount {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-        }
-
-        .price-period {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-left: 0.5rem;
-        }
-
-        .yearly-price {
-            display: none;
-        }
-
-        .yearly-note {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .card-features {
-            text-align: left;
-            margin: 2rem 0;
-        }
-
-        .feature {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .feature-limited {
-            padding: 0.5rem 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        .trial-note {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 1rem;
-        }
-
-        /* Sample Player Section */
-        .sample-player {
-            padding: 100px 0;
-            background: var(--bg-secondary);
-        }
-
-        .player-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .player-wrapper {
-            background: var(--bg-primary);
-            border-radius: 25px;
-            padding: 3rem;
-            border: 1px solid var(--border-color);
-            margin-bottom: 3rem;
-        }
-
-        .player {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .player-artwork {
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .artwork-visual {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .waveform-container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .pulse-rings {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-
-        .pulse-rings span {
-            position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: pulseRing 2s linear infinite;
-        }
-
-        .pulse-rings span:nth-child(1) { animation-delay: 0s; }
-        .pulse-rings span:nth-child(2) { animation-delay: 0.7s; }
-        .pulse-rings span:nth-child(3) { animation-delay: 1.4s; }
-
-        @keyframes pulseRing {
-            0% {
-                width: 60%;
-                height: 60%;
-                top: 20%;
-                left: 20%;
-                opacity: 1;
-            }
-            100% {
-                width: 100%;
-                height: 100%;
-                top: 0%;
-                left: 0%;
-                opacity: 0;
-            }
-        }
-
-        .player-info h4 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .player-info p {
-            color: var(--text-secondary);
-        }
-
-        .player-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .control-btn {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
-
-        .control-btn:hover {
-            background: var(--accent-primary);
-            border-color: var(--accent-primary);
-        }
-
-        .play-pause {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-primary);
-            border-color: var(--accent-primary);
-        }
-
-        .play-pause:hover {
-            background: var(--accent-secondary);
-            border-color: var(--accent-secondary);
-        }
-
-        .pause-icon {
-            display: none;
-        }
-
-        .player-progress {
-            grid-column: 1 / -1;
-            margin-top: 2rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-tertiary);
-            border-radius: 3px;
-            position: relative;
-            cursor: pointer;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent-primary);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        .progress-handle {
-            width: 16px;
-            height: 16px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 0%;
-            cursor: grab;
-            transition: left 0.1s ease;
-        }
-
-        .progress-handle:active {
-            cursor: grabbing;
-        }
-
-        .progress-times {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .sample-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .sample-feature {
-            text-align: center;
-            padding: 2rem;
-            background: var(--bg-primary);
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .sample-feature h4 {
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .sample-feature p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Social Proof Section */
-        .social-proof {
-            padding: 80px 0;
-            background: var(--bg-primary);
-        }
-
-        .proof-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .proof-stat {
-            padding: 2rem;
-        }
-
-        .proof-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-            display: block;
-        }
-
-        .proof-label {
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-        }
-
-        .testimonial {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .testimonial-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        /* Waitlist Section */
-        .waitlist {
-            padding: 100px 0;
-            background: var(--bg-secondary);
-        }
-
-        .waitlist-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .waitlist-form {
-            margin: 3rem 0;
-        }
-
-        .form-group {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group input {
-            flex: 1;
-            padding: 1.25rem 1.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus {
-            border-color: var(--accent-primary);
-        }
-
-        .form-group input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-note {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .waitlist-benefits {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .benefit {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .benefit-icon {
-            font-size: 1.2rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-primary);
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 0 2rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-bottom p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .player {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .player-controls {
-                justify-content: center;
-            }
-
-            .form-group {
-                flex-direction: column;
-            }
-
-            .waitlist-benefits {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .pricing-toggle {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .hero {
-                padding: 100px 0 60px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <div class="logo-icon">
-                    <div class="radio-waves">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <div class="nav-waves">
+                        <span></span><span></span><span></span>
                     </div>
                 </div>
-                <span class="logo-text">FeedCast</span>
-            </div>
-            <div class="nav-links">
+                FeedCast
+            </a>
+            <div class="nav-links" id="navLinks">
                 <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#listen">Listen</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#sample">Sample</a>
-                <a href="https://t.me/TheFeedCastRadioBot" class="btn-primary" target="_blank">
-                    <svg class="telegram-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.58.37-1.64 1.08-.15.1-.29.15-.43.15-.13 0-.39-.07-.56-.13-.21-.07-.37-.11-.35-.23.02-.13.11-.21.28-.23.7-.8 1.7-1.87 2.66-2.25.91-.36 1.94-.53 2.99-.53.59 0 .97.36.97.85z"/>
-                    </svg>
-                    Try Bot
-                </a>
+                <a href="https://t.me/TheFeedCastRadioBot" class="nav-cta" target="_blank">Try Free</a>
             </div>
-            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="hero-background">
-            <div class="floating-notes">
-                <div class="note note-1">♪</div>
-                <div class="note note-2">♫</div>
-                <div class="note note-3">♪</div>
-                <div class="note note-4">♫</div>
-                <div class="note note-5">♪</div>
+        <div class="hero-content">
+            <h1 class="hero-headline fade-in">Your world,<br>narrated.</h1>
+            <p class="hero-sub fade-in delay-1">AI radio that knows what you care about. News, music, and stories — generated fresh every day by Dan&nbsp;&&nbsp;Jess.</p>
+            <div class="hero-actions fade-in delay-2">
+                <a href="https://t.me/TheFeedCastRadioBot" class="btn-apple" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Try FeedCast — It's Free
+                </a>
+                <button class="btn-apple-secondary" onclick="document.getElementById('listen').scrollIntoView({behavior:'smooth'})">
+                    Hear a Sample
+                </button>
             </div>
         </div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="gradient-text">Your world, narrated.</span>
-                </h1>
-                <p class="hero-subtitle">AI radio that knows what you care about.</p>
-                <p class="hero-description">
-                    Get your personalized radio station with news, music, and stories 
-                    tailored to your interests. Generated fresh every day by Dan & Jess.
-                </p>
-                <div class="hero-actions">
-                    <a href="https://t.me/TheFeedCastRadioBot" class="btn-primary btn-large" target="_blank">
-                        <svg class="telegram-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
-                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.58.37-1.64 1.08-.15.1-.29.15-.43.15-.13 0-.39-.07-.56-.13-.21-.07-.37-.11-.35-.23.02-.13.11-.21.28-.23.7-.8 1.7-1.87 2.66-2.25.91-.36 1.94-.53 2.99-.53.59 0 .97.36.97.85z"/>
-                        </svg>
-                        Try FeedCast Bot
-                        <span class="btn-arrow">→</span>
-                    </a>
-                    <button class="btn-secondary btn-large" onclick="scrollToSample()">
-                        <span class="play-icon"></span>
-                        Hear a Sample
-                    </button>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">5-15</span>
-                        <span class="stat-label">minutes</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">AI</span>
-                        <span class="stat-label">generated</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">Daily</span>
-                        <span class="stat-label">fresh</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Your personalized radio station in three simple steps</p>
-            
-            <div class="steps">
-                <div class="step">
-                    <div class="step-icon">
-                        <div class="icon-topics">
-                            <div class="topic-chip">Tech</div>
-                            <div class="topic-chip">Business</div>
-                            <div class="topic-chip">AI</div>
+        <!-- Phone Mockup -->
+        <div class="hero-phone fade-in delay-3">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="chat-header">
+                        <div class="chat-avatar">🎙️</div>
+                        <div>
+                            <div class="chat-name">FeedCast Bot</div>
+                            <div class="chat-status">online</div>
                         </div>
                     </div>
-                    <div class="step-content">
-                        <h3>1. Pick Your Topics</h3>
-                        <p>Choose from tech, business, culture, sports, and more. We curate news from the best sources and transform them into natural conversations.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-icon">
-                        <div class="icon-vibe">
-                            <div class="vibe-selector">
-                                <div class="vibe-option active">🎵 Lo-fi</div>
-                                <div class="vibe-option">🎷 Jazz</div>
-                                <div class="vibe-option">🎹 Electronic</div>
-                            </div>
+                    <div class="chat-messages">
+                        <div class="chat-msg bot">
+                            <div class="msg-bubble">Hey! 👋 I'm FeedCast. What topics do you want in your daily radio?</div>
                         </div>
-                    </div>
-                    <div class="step-content">
-                        <h3>2. Choose Your Vibe</h3>
-                        <p>Select music style and show personality. Dan & Jess adapt their conversation style to match your preferred listening experience.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-icon">
-                        <div class="icon-play">
-                            <div class="play-button">
-                                <span class="play-symbol">▶</span>
-                                <div class="play-rings">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                        <div class="chat-msg user">
+                            <div class="msg-bubble">Tech, AI, and startups</div>
+                        </div>
+                        <div class="chat-msg bot">
+                            <div class="msg-bubble">Great taste! 🎵 What music vibe? Lo-fi, Jazz, or Electronic?</div>
+                        </div>
+                        <div class="chat-msg user">
+                            <div class="msg-bubble">Lo-fi please</div>
+                        </div>
+                        <div class="chat-msg bot">
+                            <div class="msg-bubble">Perfect. Your episode is generating...</div>
+                        </div>
+                        <div class="chat-msg bot">
+                            <div class="msg-bubble msg-audio">
+                                <div class="audio-indicator">
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
+                                <span class="audio-time">5:23</span>
                             </div>
                         </div>
                     </div>
-                    <div class="step-content">
-                        <h3>3. Hit Play</h3>
-                        <p>Your personalized station starts instantly. News discussions, music interludes, and smooth transitions flow together like professional radio.</p>
-                    </div>
                 </div>
+                <div class="phone-home-bar"></div>
             </div>
         </div>
     </section>
 
-    <!-- Sample Player Section -->
-    <section id="sample" class="sample-player">
+    <!-- Ticker / Stats -->
+    <section class="ticker">
+        <div class="ticker-inner">
+            <div class="ticker-item">
+                <span class="ticker-num">5–15</span>
+                <span class="ticker-label">min episodes</span>
+            </div>
+            <div class="ticker-sep"></div>
+            <div class="ticker-item">
+                <span class="ticker-num">AI</span>
+                <span class="ticker-label">generated daily</span>
+            </div>
+            <div class="ticker-sep"></div>
+            <div class="ticker-item">
+                <span class="ticker-num">50+</span>
+                <span class="ticker-label">topics</span>
+            </div>
+            <div class="ticker-sep"></div>
+            <div class="ticker-item">
+                <span class="ticker-num">Free</span>
+                <span class="ticker-label">to start</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section section-gray">
         <div class="container">
-            <h2 class="section-title">Hear a Sample</h2>
-            <p class="section-subtitle">Experience FeedCast Radio in action</p>
+            <h2 class="section-headline scroll-reveal">Three steps.<br>That's it.</h2>
+            <p class="section-sub scroll-reveal">No app to download. No account to create. Just open Telegram.</p>
             
-            <div class="player-container">
-                <div class="player-wrapper">
-                    <div class="player">
-                        <div class="player-artwork">
-                            <div class="artwork-visual">
-                                <div class="waveform-container">
-                                    <canvas id="waveform" width="60" height="40"></canvas>
-                                </div>
-                                <div class="pulse-rings">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="player-info">
-                            <h4 id="current-segment">AI & Tech News Opening</h4>
-                            <p id="current-description">Dan & Jess discuss latest AI developments</p>
-                        </div>
-
-                        <div class="player-controls">
-                            <button class="control-btn skip-back" onclick="skipBack()">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                                </svg>
-                            </button>
-                            <button class="control-btn play-pause" id="playPauseBtn" onclick="togglePlayPause()">
-                                <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                                <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                                </svg>
-                            </button>
-                            <button class="control-btn skip-forward" onclick="skipForward()">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="player-progress">
-                            <div class="progress-bar" onclick="seekAudio(event)">
-                                <div class="progress-fill" id="progressFill"></div>
-                                <div class="progress-handle" id="progressHandle"></div>
-                            </div>
-                            <div class="progress-times">
-                                <span id="currentTime">0:00</span>
-                                <span id="totalTime">2:34</span>
-                            </div>
+            <div class="steps-grid">
+                <div class="step-card scroll-reveal">
+                    <div class="step-num">1</div>
+                    <div class="step-visual">
+                        <div class="step-chips">
+                            <span class="chip">Tech</span>
+                            <span class="chip">AI</span>
+                            <span class="chip active">Startups</span>
+                            <span class="chip">Culture</span>
+                            <span class="chip active">Business</span>
                         </div>
                     </div>
+                    <h3>Pick your topics</h3>
+                    <p>Choose what matters to you. Tech, business, culture, sports — we curate from the best sources.</p>
                 </div>
-
-                <div class="sample-features">
-                    <div class="sample-feature">
-                        <div class="feature-icon">🎯</div>
-                        <h4>Personalized Content</h4>
-                        <p>This sample is tailored for tech and AI topics</p>
+                <div class="step-card scroll-reveal">
+                    <div class="step-num">2</div>
+                    <div class="step-visual">
+                        <div class="vibe-stack">
+                            <div class="vibe-row active">🎵 Lo-fi Chill</div>
+                            <div class="vibe-row">🎷 Smooth Jazz</div>
+                            <div class="vibe-row">🎹 Electronic</div>
+                        </div>
                     </div>
-                    <div class="sample-feature">
-                        <div class="feature-icon">🎵</div>
-                        <h4>AI-Generated Music</h4>
-                        <p>Seamless transitions between news and music</p>
+                    <h3>Choose your vibe</h3>
+                    <p>Select the music style and mood. Dan & Jess adapt their tone to match your listening experience.</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-num">3</div>
+                    <div class="step-visual">
+                        <div class="play-circle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
-                    <div class="sample-feature">
-                        <div class="feature-icon">🎙️</div>
-                        <h4>Natural Voices</h4>
-                        <p>Dan & Jess sound like real radio hosts</p>
-                    </div>
+                    <h3>Hit play</h3>
+                    <p>Your personalized radio starts. News, music interludes, and smooth transitions — like professional radio.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof Section -->
-    <section class="social-proof">
+    <!-- Features -->
+    <section id="features" class="section section-white">
         <div class="container">
-            <h2 class="section-title">Trusted by Early Listeners</h2>
-            
-            <div class="proof-stats">
-                <div class="proof-stat">
-                    <span class="proof-number">10K+</span>
-                    <p class="proof-label">Waitlist Members</p>
-                </div>
-                <div class="proof-stat">
-                    <span class="proof-number">4.8★</span>
-                    <p class="proof-label">Beta Rating</p>
-                </div>
-                <div class="proof-stat">
-                    <span class="proof-number">50+</span>
-                    <p class="proof-label">Topics Available</p>
-                </div>
-                <div class="proof-stat">
-                    <span class="proof-number">24/7</span>
-                    <p class="proof-label">Fresh Content</p>
-                </div>
-            </div>
+            <h2 class="section-headline scroll-reveal">Why FeedCast.</h2>
+            <p class="section-sub scroll-reveal">Everything you need. Nothing you don't.</p>
 
-            <div class="testimonial">
-                <p class="testimonial-text">
-                    "Finally, a radio station that gets me. Dan & Jess discuss exactly what I care about, 
-                    and the music transitions are so smooth I forget it's AI-generated."
-                </p>
-                <p class="testimonial-author">— Early Beta User</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title">Choose Your Plan</h2>
-            <p class="section-subtitle">Start free, upgrade for the full experience</p>
-            
-            <div class="pricing-toggle">
-                <span class="toggle-label">Monthly</span>
-                <div class="toggle-switch" onclick="togglePricing()" id="pricingToggle">
-                    <div class="toggle-slider"></div>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon-wrap"><span class="feature-emoji">🎙️</span></div>
+                    <h3>Natural voices</h3>
+                    <p>Dan & Jess sound like real radio hosts. Not robots reading a script.</p>
                 </div>
-                <span class="toggle-label">Yearly <span class="savings">Save 30%</span></span>
-            </div>
-
-            <div class="pricing-cards">
-                <div class="pricing-card free-card">
-                    <div class="card-header">
-                        <h3>Free</h3>
-                        <div class="price">
-                            <span class="price-amount">$0</span>
-                            <span class="price-period">/month</span>
-                        </div>
-                    </div>
-                    <div class="card-features">
-                        <div class="feature">✓ 1 episode per day</div>
-                        <div class="feature">✓ ~5 minutes</div>
-                        <div class="feature">✓ 3 topics max</div>
-                        <div class="feature">✓ Closing song included 🎵</div>
-                        <div class="feature">✓ Dan & Jess voices</div>
-                        <div class="feature-limited">• Brief sponsor messages</div>
-                    </div>
-                    <a href="https://t.me/TheFeedCastRadioBot" class="btn-secondary btn-full" target="_blank">Get Started Free</a>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon-wrap"><span class="feature-emoji">🎵</span></div>
+                    <h3>Music interludes</h3>
+                    <p>AI-generated music between segments. Lo-fi, jazz, electronic — your pick.</p>
                 </div>
-
-                <div class="pricing-card premium-card popular">
-                    <div class="popular-badge">Most Popular</div>
-                    <div class="card-header">
-                        <h3>Premium</h3>
-                        <div class="price">
-                            <span class="price-amount monthly-price">$6.99</span>
-                            <span class="price-amount yearly-price">$4.99</span>
-                            <span class="price-period">/month</span>
-                        </div>
-                        <div class="yearly-note">$59.99 billed annually</div>
-                    </div>
-                    <div class="card-features">
-                        <div class="feature">✓ 10 episodes per day</div>
-                        <div class="feature">✓ ~16min full radio experience</div>
-                        <div class="feature">✓ All topics available</div>
-                        <div class="feature">✓ 🎵 Music interludes + closing song</div>
-                        <div class="feature">✓ 🎨 Thematic music by category</div>
-                        <div class="feature">✓ 🚫 No ads</div>
-                        <div class="feature">✓ All news sources</div>
-                        <div class="feature">✓ Priority generation</div>
-                    </div>
-                    <a href="https://buy.stripe.com/test_8x228k0cZaA3exF1ZQ14400" class="btn-primary btn-full" target="_blank">Get Premium — $6.99/mo</a>
-                    <p class="trial-note">Get notified when Premium launches</p>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon-wrap"><span class="feature-emoji">📱</span></div>
+                    <h3>Telegram-native</h3>
+                    <p>No app download. Works right inside Telegram. Just press play.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon-wrap"><span class="feature-emoji">🧠</span></div>
+                    <h3>Learns your taste</h3>
+                    <p>The more you listen, the better it gets. AI that actually understands you.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon-wrap"><span class="feature-emoji">⚡</span></div>
+                    <h3>Fresh daily</h3>
+                    <p>New episodes generated every day. Never the same show twice.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon-wrap"><span class="feature-emoji">🌍</span></div>
+                    <h3>50+ topics</h3>
+                    <p>From global headlines to niche interests. Your world, your way.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Waitlist Section -->
-    <section class="waitlist" id="waitlist">
+    <!-- Sample Player -->
+    <section id="listen" class="section section-gray">
         <div class="container">
-            <div class="waitlist-content">
-                <h2 class="section-title">Be Among the First</h2>
-                <p class="section-subtitle">Join the waitlist and get early access to FeedCast Radio</p>
-                
-                <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/xpznpooz" method="POST">
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" required placeholder="Enter your email address">
-                        <button type="submit" class="btn-primary">
-                            Join Waitlist
-                            <span class="btn-arrow">→</span>
+            <h2 class="section-headline scroll-reveal">Hear the difference.</h2>
+            <p class="section-sub scroll-reveal">This is what AI radio sounds like.</p>
+
+            <div class="player-card scroll-reveal">
+                <div class="player-top">
+                    <div class="player-art">
+                        <canvas id="waveform" width="80" height="50"></canvas>
+                        <div class="player-pulse"><span></span><span></span></div>
+                    </div>
+                    <div class="player-meta">
+                        <div class="player-title" id="current-segment">AI & Tech News Opening</div>
+                        <div class="player-desc" id="current-description">Dan & Jess discuss latest AI developments</div>
+                    </div>
+                    <div class="player-controls">
+                        <button class="ctrl-btn" onclick="skipBack()" aria-label="Skip back">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        </button>
+                        <button class="ctrl-btn ctrl-play" id="playPauseBtn" onclick="togglePlayPause()" aria-label="Play or Pause">
+                            <svg class="icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            <svg class="icon-pause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <button class="ctrl-btn" onclick="skipForward()" aria-label="Skip forward">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
                         </button>
                     </div>
-                    <input type="hidden" name="_subject" value="New FeedCast Waitlist Signup">
-                    <input type="hidden" name="_next" value="#waitlist">
-                    <p class="form-note">We'll notify you when FeedCast Radio launches. No spam, promise.</p>
-                </form>
-
-                <div class="waitlist-benefits">
-                    <div class="benefit">
-                        <div class="benefit-icon">⚡</div>
-                        <span>Early access</span>
+                </div>
+                <div class="player-progress">
+                    <div class="progress-track" id="progressTrack" onclick="seekAudio(event)">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="progress-thumb" id="progressHandle"></div>
                     </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">🎁</div>
-                        <span>Free premium trial</span>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">💡</div>
-                        <span>Shape the product</span>
+                    <div class="progress-times">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalTime">2:34</span>
                     </div>
                 </div>
+            </div>
 
-                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Or try the bot right now:</p>
-                    <a href="https://t.me/TheFeedCastRadioBot" class="telegram-cta" target="_blank">
-                        <svg class="telegram-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
-                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.58.37-1.64 1.08-.15.1-.29.15-.43.15-.13 0-.39-.07-.56-.13-.21-.07-.37-.11-.35-.23.02-.13.11-.21.28-.23.7-.8 1.7-1.87 2.66-2.25.91-.36 1.94-.53 2.99-.53.59 0 .97.36.97.85z"/>
-                        </svg>
-                        @TheFeedCastRadioBot
-                    </a>
+            <div class="player-features">
+                <div class="pf-item scroll-reveal">
+                    <span class="pf-icon">🎯</span>
+                    <strong>Personalized</strong>
+                    <span>Tailored to your interests</span>
                 </div>
+                <div class="pf-item scroll-reveal">
+                    <span class="pf-icon">🎵</span>
+                    <strong>Music & News</strong>
+                    <span>Seamless transitions</span>
+                </div>
+                <div class="pf-item scroll-reveal">
+                    <span class="pf-icon">🎙️</span>
+                    <strong>Natural Voices</strong>
+                    <span>Real radio hosts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section section-white">
+        <div class="container">
+            <h2 class="section-headline scroll-reveal">Simple pricing.<br>No surprises.</h2>
+            <p class="section-sub scroll-reveal">Start free. Upgrade when you're hooked.</p>
+
+            <div class="pricing-toggle scroll-reveal">
+                <span class="toggle-label" id="toggleMonthly">Monthly</span>
+                <button class="toggle-switch" id="pricingToggle" onclick="togglePricing()" aria-label="Toggle pricing">
+                    <div class="toggle-knob"></div>
+                </button>
+                <span class="toggle-label" id="toggleYearly">Yearly <span class="badge-save">Save 30%</span></span>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="price-card scroll-reveal">
+                    <div class="price-tier">Free</div>
+                    <div class="price-amount">
+                        <span class="price-dollar">$</span><span class="price-value">0</span>
+                        <span class="price-period">/mo</span>
+                    </div>
+                    <ul class="price-features">
+                        <li><span class="check">✓</span> 1 episode per day</li>
+                        <li><span class="check">✓</span> ~5 minutes</li>
+                        <li><span class="check">✓</span> 3 topics max</li>
+                        <li><span class="check">✓</span> Closing song included 🎵</li>
+                        <li><span class="check">✓</span> Dan & Jess voices</li>
+                        <li class="muted"><span class="dot">•</span> Brief sponsor messages</li>
+                    </ul>
+                    <a href="https://t.me/TheFeedCastRadioBot" class="btn-apple-secondary btn-full" target="_blank">Get Started Free</a>
+                </div>
+                <div class="price-card price-card-premium scroll-reveal">
+                    <div class="price-badge">Most Popular</div>
+                    <div class="price-tier">Premium</div>
+                    <div class="price-amount">
+                        <span class="price-dollar">$</span><span class="price-value monthly-price">6.99</span><span class="price-value yearly-price" style="display:none">4.99</span>
+                        <span class="price-period">/mo</span>
+                    </div>
+                    <div class="yearly-note" style="display:none">$59.99 billed annually</div>
+                    <ul class="price-features">
+                        <li><span class="check">✓</span> 10 episodes per day</li>
+                        <li><span class="check">✓</span> ~16 min full radio experience</li>
+                        <li><span class="check">✓</span> All topics available</li>
+                        <li><span class="check">✓</span> 🎵 Music interludes + closing song</li>
+                        <li><span class="check">✓</span> 🎨 Thematic music by category</li>
+                        <li><span class="check">✓</span> 🚫 No ads</li>
+                        <li><span class="check">✓</span> All news sources</li>
+                        <li><span class="check">✓</span> Priority generation</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/test_8x228k0cZaA3exF1ZQ14400" class="btn-apple btn-full" target="_blank">Get Premium — $6.99/mo</a>
+                    <p class="price-note">Get notified when Premium launches</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-gray" id="faq">
+        <div class="container container-narrow">
+            <h2 class="section-headline scroll-reveal">Questions? Answers.</h2>
+
+            <div class="faq-list">
+                <details class="faq-item scroll-reveal">
+                    <summary>How does FeedCast work?</summary>
+                    <div class="faq-body">Tell our Telegram bot what topics you care about and your preferred music vibe. Every day, our AI generates a personalized radio episode with Dan & Jess — complete with news discussions, music interludes, and smooth transitions.</div>
+                </details>
+                <details class="faq-item scroll-reveal">
+                    <summary>Do I need to download an app?</summary>
+                    <div class="faq-body">Nope. FeedCast works entirely inside Telegram. Just start a chat with @TheFeedCastRadioBot and you're ready to go.</div>
+                </details>
+                <details class="faq-item scroll-reveal">
+                    <summary>Who are Dan & Jess?</summary>
+                    <div class="faq-body">Dan and Jess are our AI radio hosts. They have natural-sounding voices and adapt their conversation style based on your preferences. They discuss the news, crack jokes, and keep things interesting — like real radio personalities.</div>
+                </details>
+                <details class="faq-item scroll-reveal">
+                    <summary>Is the music AI-generated too?</summary>
+                    <div class="faq-body">Yes! The music interludes and closing songs are AI-generated to match your chosen vibe — lo-fi, jazz, electronic, and more. Each episode has a unique soundtrack.</div>
+                </details>
+                <details class="faq-item scroll-reveal">
+                    <summary>Can I cancel Premium anytime?</summary>
+                    <div class="faq-body">Absolutely. No contracts, no commitments. Cancel anytime and you'll keep Premium features until the end of your billing period.</div>
+                </details>
+                <details class="faq-item scroll-reveal">
+                    <summary>What news sources do you use?</summary>
+                    <div class="faq-body">We aggregate from top-tier sources across categories — tech blogs, financial news, culture outlets, sports feeds, and more. Premium unlocks access to all sources.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist / CTA -->
+    <section class="section section-dark" id="waitlist">
+        <div class="container container-narrow">
+            <h2 class="section-headline-light scroll-reveal">Start listening today.</h2>
+            <p class="section-sub-light scroll-reveal">Join the waitlist or try the bot right now.</p>
+
+            <form class="waitlist-form scroll-reveal" id="waitlistForm" action="https://formspree.io/f/xpznpooz" method="POST">
+                <div class="form-row">
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" autocomplete="email">
+                    <button type="submit" class="btn-apple">
+                        Join Waitlist
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                </div>
+                <input type="hidden" name="_subject" value="New FeedCast Waitlist Signup">
+                <p class="form-note" id="formNote">No spam. We'll notify you when FeedCast launches.</p>
+            </form>
+
+            <div class="waitlist-perks scroll-reveal">
+                <span>⚡ Early access</span>
+                <span>🎁 Free premium trial</span>
+                <span>💡 Shape the product</span>
+            </div>
+
+            <div class="cta-divider"></div>
+            
+            <div class="cta-telegram scroll-reveal">
+                <p>Or try the bot right now</p>
+                <a href="https://t.me/TheFeedCastRadioBot" class="btn-telegram" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.58.37-1.64 1.08-.15.1-.29.15-.43.15-.13 0-.39-.07-.56-.13-.21-.07-.37-.11-.35-.23.02-.13.11-.21.28-.23.7-.8 1.7-1.87 2.66-2.25.91-.36 1.94-.53 2.99-.53.59 0 .97.36.97.85z"/></svg>
+                    Open @TheFeedCastRadioBot
+                </a>
             </div>
         </div>
     </section>
@@ -1549,345 +417,27 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-top">
                 <div class="footer-brand">
-                    <div class="logo-icon">
-                        <div class="radio-waves">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+                    <div class="nav-logo-icon small">
+                        <div class="nav-waves"><span></span><span></span><span></span></div>
                     </div>
-                    <span class="logo-text">FeedCast</span>
+                    FeedCast
                 </div>
                 <div class="footer-links">
-                    <a href="#privacy">Privacy</a>
-                    <a href="#terms">Terms</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#faq">FAQ</a>
                     <a href="mailto:hello@feedcast.ai">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 FeedCast Radio. Made with ❤️ by AI for humans.</p>
+                <p>Copyright © 2026 FeedCast. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Global variables
-        let isYearlyPricing = false;
-        let isPlaying = false;
-        let currentTime = 0;
-        let totalTime = 120; // 2:00 sample
-        let animationId;
-        let progressInterval;
-
-        // Real audio element
-        const audio = new Audio('assets/sample-episode.mp3');
-        audio.preload = 'metadata';
-
-        // Sample segments data (matches actual generated episode structure)
-        const sampleSegments = [
-            {
-                title: "AI & Tech News Opening",
-                description: "Dan & Jess kick off today's top stories",
-                duration: 35
-            },
-            {
-                title: "Deep Dive: Top Story",
-                description: "In-depth discussion on the biggest tech news",
-                duration: 40
-            },
-            {
-                title: "Quick Break",
-                description: "\"We'll be right back!\" — Dan",
-                duration: 20
-            },
-            {
-                title: "And We're Back",
-                description: "Jess brings more stories to the table",
-                duration: 25
-            }
-        ];
-
-        let currentSegmentIndex = 0;
-
-        // DOM Content Loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAudioVisualization();
-            initializeWaitlistForm();
-            
-            // Wire real audio events
-            audio.addEventListener('loadedmetadata', () => {
-                totalTime = Math.floor(audio.duration);
-                document.getElementById('totalTime').textContent = formatTime(totalTime);
-            });
-            audio.addEventListener('timeupdate', () => {
-                currentTime = Math.floor(audio.currentTime);
-                updateProgress();
-                updatePlayerInfo();
-            });
-            audio.addEventListener('ended', () => {
-                isPlaying = false;
-                const btn = document.getElementById('playPauseBtn');
-                btn.querySelector('.play-icon').style.display = 'block';
-                btn.querySelector('.pause-icon').style.display = 'none';
-                stopWaveformAnimation();
-                currentTime = 0;
-                audio.currentTime = 0;
-                updateProgress();
-            });
-            
-            updatePlayerInfo();
-        });
-
-        // Navigation Functions
-        function scrollToWaitlist() {
-            document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function scrollToSample() {
-            document.getElementById('sample').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            toggle.classList.toggle('active');
-        }
-
-        // Pricing Functions
-        function togglePricing() {
-            isYearlyPricing = !isYearlyPricing;
-            const toggle = document.getElementById('pricingToggle');
-            const monthlyPrices = document.querySelectorAll('.monthly-price');
-            const yearlyPrices = document.querySelectorAll('.yearly-price');
-            const yearlyNotes = document.querySelectorAll('.yearly-note');
-            
-            toggle.classList.toggle('active');
-            
-            monthlyPrices.forEach(price => {
-                price.style.display = isYearlyPricing ? 'none' : 'inline';
-            });
-            
-            yearlyPrices.forEach(price => {
-                price.style.display = isYearlyPricing ? 'inline' : 'none';
-            });
-            
-            yearlyNotes.forEach(note => {
-                note.style.display = isYearlyPricing ? 'block' : 'none';
-            });
-        }
-
-        // Audio Player Functions
-        function togglePlayPause() {
-            const btn = document.getElementById('playPauseBtn');
-            const playIcon = btn.querySelector('.play-icon');
-            const pauseIcon = btn.querySelector('.pause-icon');
-            
-            isPlaying = !isPlaying;
-            
-            if (isPlaying) {
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-                audio.play();
-                startWaveformAnimation();
-            } else {
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-                audio.pause();
-                stopWaveformAnimation();
-            }
-        }
-
-        function skipBack() {
-            audio.currentTime = Math.max(0, audio.currentTime - 15);
-        }
-
-        function skipForward() {
-            audio.currentTime = Math.min(totalTime, audio.currentTime + 15);
-        }
-
-        function seekAudio(event) {
-            const progressBar = event.currentTarget;
-            const rect = progressBar.getBoundingClientRect();
-            const clickX = event.clientX - rect.left;
-            const percentage = clickX / rect.width;
-            
-            audio.currentTime = totalTime * percentage;
-        }
-
-        function updateProgress() {
-            const percentage = (currentTime / totalTime) * 100;
-            const progressFill = document.getElementById('progressFill');
-            const progressHandle = document.getElementById('progressHandle');
-            const currentTimeElement = document.getElementById('currentTime');
-            
-            progressFill.style.width = percentage + '%';
-            progressHandle.style.left = percentage + '%';
-            currentTimeElement.textContent = formatTime(currentTime);
-        }
-
-        function updatePlayerInfo() {
-            // Determine current segment based on time
-            let timeAccum = 0;
-            let segmentIndex = 0;
-            
-            for (let i = 0; i < sampleSegments.length; i++) {
-                if (currentTime < timeAccum + sampleSegments[i].duration) {
-                    segmentIndex = i;
-                    break;
-                }
-                timeAccum += sampleSegments[i].duration;
-            }
-            
-            if (segmentIndex !== currentSegmentIndex) {
-                currentSegmentIndex = segmentIndex;
-                const segment = sampleSegments[segmentIndex];
-                
-                document.getElementById('current-segment').textContent = segment.title;
-                document.getElementById('current-description').textContent = segment.description;
-            }
-        }
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return mins + ':' + (secs < 10 ? '0' : '') + secs;
-        }
-
-        // Audio Visualization
-        function initializeAudioVisualization() {
-            const canvas = document.getElementById('waveform');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const bars = 8;
-            const barWidth = canvas.width / bars;
-            
-            function drawWaveform() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                
-                for (let i = 0; i < bars; i++) {
-                    const height = isPlaying ? 
-                        Math.random() * canvas.height * 0.8 + canvas.height * 0.1 :
-                        canvas.height * 0.2;
-                    
-                    const x = i * barWidth + barWidth * 0.2;
-                    const y = (canvas.height - height) / 2;
-                    
-                    ctx.fillRect(x, y, barWidth * 0.6, height);
-                }
-                
-                if (isPlaying) {
-                    animationId = requestAnimationFrame(drawWaveform);
-                }
-            }
-            
-            drawWaveform();
-        }
-
-        function startWaveformAnimation() {
-            const canvas = document.getElementById('waveform');
-            if (!canvas) return;
-            
-            function animate() {
-                initializeAudioVisualization();
-                if (isPlaying) {
-                    setTimeout(() => requestAnimationFrame(animate), 100);
-                }
-            }
-            animate();
-        }
-
-        function stopWaveformAnimation() {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-            
-            // Draw static waveform
-            initializeAudioVisualization();
-        }
-
-        // Waitlist Form — AJAX submit (no redirect)
-        function initializeWaitlistForm() {
-            const form = document.getElementById('waitlistForm');
-            if (!form) return;
-            
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const button = form.querySelector('button[type="submit"]');
-                const emailInput = form.querySelector('input[type="email"]');
-                const originalText = button.innerHTML;
-                
-                button.innerHTML = '✓ Joining...';
-                button.disabled = true;
-                
-                fetch(form.action, {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: emailInput.value, _subject: 'New FeedCast Waitlist Signup' })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        button.innerHTML = '✅ You\'re on the list!';
-                        emailInput.value = '';
-                        form.querySelector('.form-note').textContent = '🎉 We\'ll notify you when FeedCast launches!';
-                    } else {
-                        // Fallback: store email locally even if Formspree fails
-                        button.innerHTML = '✅ You\'re on the list!';
-                        emailInput.value = '';
-                        form.querySelector('.form-note').textContent = '🎉 We\'ll notify you when FeedCast launches!';
-                        console.warn('Formspree submission failed, email captured client-side');
-                    }
-                    setTimeout(() => {
-                        button.innerHTML = originalText;
-                        button.disabled = false;
-                    }, 4000);
-                })
-                .catch(err => {
-                    button.innerHTML = '✅ You\'re on the list!';
-                    emailInput.value = '';
-                    form.querySelector('.form-note').textContent = '🎉 We\'ll notify you when FeedCast launches!';
-                    console.error('Form error:', err);
-                    setTimeout(() => {
-                        button.innerHTML = originalText;
-                        button.disabled = false;
-                    }, 4000);
-                });
-            });
-        }
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Initialize yearly pricing display
-        document.addEventListener('DOMContentLoaded', function() {
-            const yearlyPrices = document.querySelectorAll('.yearly-price');
-            const yearlyNotes = document.querySelectorAll('.yearly-note');
-            
-            yearlyPrices.forEach(price => {
-                price.style.display = 'none';
-            });
-            
-            yearlyNotes.forEach(note => {
-                note.style.display = 'none';
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
